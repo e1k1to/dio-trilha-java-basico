@@ -28,7 +28,8 @@ public class Board {
 
     public boolean hasErrors() {
         if(getStatus() == NON_STARTED) return false;
-        return spaces.stream().flatMap(p -> p.stream()).anyMatch(s -> nonNull(s.getActual()) && s.getActual() == s.getExpected());
+        return spaces.stream().flatMap(Collection::stream)
+            .anyMatch(s -> nonNull(s.getActual()) && !(s.getActual() == s.getExpected()));
     }
 
     public boolean changeValue(final int col, final int row, final Integer value) {
